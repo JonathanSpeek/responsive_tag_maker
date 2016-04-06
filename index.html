@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+
+    <style>
+        .code_section {
+            font-family: monospace;
+            line-height: 0.8em;
+        }
+
+        #tag_code {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<div align="center">
+    <h1>SOVRN Responsive Ad Tag Generator</h1><br/>
+</div>
+<br/>
+<form class="form-horizontal">
+    <fieldset>
+
+        <!-- Desktop tag-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="desktop_script">Desktop</label>
+            <div class="col-md-4">
+                <input id="desktop_script" name="desktop_script" type="text"
+                       placeholder="http://ap.lijit.com/www/delivery/fpi.js?..."
+                       class="form-control input-md" required>
+                <p>This is intended for screens wider than 969px</p>
+            </div>
+        </div>
+
+        <!-- Tablet tag-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="tablet_script">Tablet</label>
+            <div class="col-md-4">
+                <input id="tablet_script" name="tablet_script" type="text"
+                       placeholder="http://ap.lijit.com/www/delivery/fpi.js?..."
+                       class="form-control input-md" required>
+                <p>Use this for screens wider than 500px and smaller than 969px</p>
+            </div>
+        </div>
+
+        <!-- Mobile tag-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="mobile_script">Mobile</label>
+            <div class="col-md-4">
+                <input id="mobile_script" name="mobile_script" type="text"
+                       placeholder="http://ap.lijit.com/www/delivery/fpi.js?..."
+                       class="form-control input-md" required>
+                <p>Use a mobile tag for this slot</p>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit"
+                        onclick="newTag(); return false;">Generate
+                </button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+<div class="col-md-1">
+</div>
+<div class="col-md-10">
+    <div id="tag_code" class="code_section" align="left">
+        <p>&#60;script type&#61;&#34;text/javascript&#34;&#62;</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (window.innerWidth &#60; 500 && window.innerWidth &#60
+            969&#41; &#123;</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var src =&#34;<span id="insert_tablet"></span>&#34;
+        </p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.write&#40;&#39;<&#39; + &#39;script
+            src="&#39; + src + &#39;"><&#39; + &#39;/script>&#39;);</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;</p><br/>
+
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if (window.innerWidth &#60; 969&#41; &#123;</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var src =&#34;<span id="insert_desktop"></span>&#34;
+        </p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.write&#40;&#39;<&#39; + &#39;script
+            src="&#39; + src + &#39;"><&#39; + &#39;/script>&#39;);</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;</p><br/>
+
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else &#123;</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var src =&#34;<span id="insert_mobile"></span>&#34;
+        </p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.write&#40;&#39;<&#39; + &#39;script
+            src="&#39; + src + &#39;"><&#39; + &#39;/script>&#39;);</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;</p>
+        <p>&#60;script&#62;</p>
+
+    </div>
+</div>
+<div class="col-md-1">
+</div>
+</body>
+<footer>
+    <script type="text/javascript">
+        function newTag() {
+            var desktop_new = document.getElementById("desktop_script").value;
+            var tablet_new = document.getElementById("tablet_script").value;
+            var mobile_new = document.getElementById("mobile_script").value;
+            var desktop_src = desktop_new.split(" ");
+            var tablet_src = tablet_new.split(" ");
+            var mobile_src = mobile_new.split(" ");
+            document.getElementById("insert_desktop").innerHTML = desktop_src[2];
+            document.getElementById("insert_tablet").innerHTML = tablet_src[2];
+            document.getElementById("insert_mobile").innerHTML = mobile_src[2];
+            if (desktop_new && tablet_new && mobile_new != "")
+                document.getElementById('tag_code').style.display = "block";
+        }
+
+
+    </script>
+</footer>
+</html>
